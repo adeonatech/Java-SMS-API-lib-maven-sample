@@ -40,7 +40,7 @@ public class Main {
         System.out.println("    \"comment\": \"" + sendTextResponse.getComment() + "\",");
         System.out.println("    \"errCode\": \"" + sendTextResponse.getErrCode() + "\",");
 
-        int sleepTimeMillis = 3000;
+        int sleepTimeMillis = 5000;
         System.out.print("Waiting for campaign processing: ");
         for (int i = sleepTimeMillis / 1000; i > 0; i--) {
             System.out.print(i + "...");
