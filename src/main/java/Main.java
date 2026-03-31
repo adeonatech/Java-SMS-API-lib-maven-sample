@@ -36,8 +36,12 @@ public class Main {
         net.adeonatech.dto.SendTextResponse sendTextResponse = sendSMS.sendText(sendTextBody,
                 sendSMS.getToken(tokenBody).getToken());
 
+        System.out.println("\"status\": \"" + sendTextResponse.getStatus() + "\",");
+        System.out.println("    \"comment\": \"" + sendTextResponse.getComment() + "\",");
+        System.out.println("    \"errCode\": \"" + sendTextResponse.getErrCode() + "\",");
+
         // Add 2-second delay before checking the status
-        Thread.sleep(2000);
+        Thread.sleep(3000);
 
         // get SMS submission status response
         net.adeonatech.dto.TransactionResponse transactionResponse = sendSMS.getTransactionIDStatus(transactionBody,
@@ -48,9 +52,6 @@ public class Main {
             campaignStatus = transactionResponse.getDataTransaction().getCampaign_status();
         }
 
-        System.out.println("\"status\": \"" + sendTextResponse.getStatus() + "\",");
-        System.out.println("    \"comment\": \"" + sendTextResponse.getComment() + "\",");
-        System.out.println("    \"errCode\": \"" + sendTextResponse.getErrCode() + "\",");
         System.out.println("\"campaign_status\": \"" + campaignStatus + "\"");
     }
 }
