@@ -32,9 +32,20 @@ public class Main {
         TransactionBody transactionBody = new TransactionBody();
         transactionBody.setTransaction_id("{TRANSACTION_ID}");
 
-        // send SMS and print the SMS status
-        System.out.println(sendSMS.sendText(sendTextBody, sendSMS.getToken(tokenBody).getToken()).getStatus());
-        // get SMS submission status
-        System.out.println(sendSMS.getTransactionIDStatus(transactionBody,sendSMS.getToken(tokenBody).getToken()).getDataTransaction().getCampaign_status());
+        // send SMS and get the response
+        net.adeonatech.dto.SendTextResponse sendTextResponse = sendSMS.sendText(sendTextBody, sendSMS.getToken(tokenBody).getToken());
+        
+        // get SMS submission status response
+        net.adeonatech.dto.TransactionResponse transactionResponse = sendSMS.getTransactionIDStatus(transactionBody, sendSMS.getToken(tokenBody).getToken());
+        
+        String campaignStatus = "";
+        if (transactionResponse != null && transactionResponse.getDataTransaction() != null) {
+            campaignStatus = transactionResponse.getDataTransaction().getCampaign_status();
+        }
+
+        System.out.println("\"status\": \"" + sendTextResponse.getStatus() + "\",");
+        System.out.println("    \"comment\": \"" + sendTextResponse.getComment() + "\",");
+        System.out.println("    \"errCode\": \"" + sendTextResponse.getErrCode() + "\",");
+        System.out.println("\"cmapign_status\": \"" + campaignStatus + "\"");
     }
 }
