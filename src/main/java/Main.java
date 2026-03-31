@@ -40,13 +40,8 @@ public class Main {
         System.out.println("    \"comment\": \"" + sendTextResponse.getComment() + "\",");
         System.out.println("    \"errCode\": \"" + sendTextResponse.getErrCode() + "\",");
 
-        int sleepTimeMillis = 5000;
-        System.out.print("Waiting for campaign processing: ");
-        for (int i = sleepTimeMillis / 1000; i > 0; i--) {
-            System.out.print(i + "...");
-            Thread.sleep(1000);
-        }
-        System.out.println();
+        // Add 5-second delay before checking the status
+        Thread.sleep(5000);
 
         // get SMS submission status response
         net.adeonatech.dto.TransactionResponse transactionResponse = sendSMS.getTransactionIDStatus(transactionBody,
