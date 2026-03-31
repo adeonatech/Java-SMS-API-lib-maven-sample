@@ -11,9 +11,9 @@ public class Main {
 
         TokenBody tokenBody = new TokenBody();
 
-        //set your username here
+        // set your username here
         tokenBody.setUsername("{YOUR_USERNAME}");
-        //set your username here
+        // set your username here
         tokenBody.setPassword("{YOUR_PASSWORD}");
 
         SendSMSImpl sendSMS = new SendSMSImpl();
@@ -21,7 +21,7 @@ public class Main {
         SendTextBody sendTextBody = new SendTextBody();
 
         // set your number list here
-        sendTextBody.setMsisdn(sendSMS.setMsisdns(new String[]{"{MOBILE_1}", "{MOBILE_2}"}));
+        sendTextBody.setMsisdn(sendSMS.setMsisdns(new String[] { "{MOBILE_1}", "{MOBILE_2}" }));
         // set your source address here
         sendTextBody.setSourceAddress("{YOUR_SOURCE_ADDRESS}");
         // set your message here
@@ -33,11 +33,13 @@ public class Main {
         transactionBody.setTransaction_id("{TRANSACTION_ID}");
 
         // send SMS and get the response
-        net.adeonatech.dto.SendTextResponse sendTextResponse = sendSMS.sendText(sendTextBody, sendSMS.getToken(tokenBody).getToken());
-        
+        net.adeonatech.dto.SendTextResponse sendTextResponse = sendSMS.sendText(sendTextBody,
+                sendSMS.getToken(tokenBody).getToken());
+
         // get SMS submission status response
-        net.adeonatech.dto.TransactionResponse transactionResponse = sendSMS.getTransactionIDStatus(transactionBody, sendSMS.getToken(tokenBody).getToken());
-        
+        net.adeonatech.dto.TransactionResponse transactionResponse = sendSMS.getTransactionIDStatus(transactionBody,
+                sendSMS.getToken(tokenBody).getToken());
+
         String campaignStatus = "";
         if (transactionResponse != null && transactionResponse.getDataTransaction() != null) {
             campaignStatus = transactionResponse.getDataTransaction().getCampaign_status();
@@ -46,6 +48,6 @@ public class Main {
         System.out.println("\"status\": \"" + sendTextResponse.getStatus() + "\",");
         System.out.println("    \"comment\": \"" + sendTextResponse.getComment() + "\",");
         System.out.println("    \"errCode\": \"" + sendTextResponse.getErrCode() + "\",");
-        System.out.println("\"cmapign_status\": \"" + campaignStatus + "\"");
+        System.out.println("\"campaign_status\": \"" + campaignStatus + "\"");
     }
 }
