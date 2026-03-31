@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
 
         TokenBody tokenBody = new TokenBody();
 
@@ -35,6 +35,9 @@ public class Main {
         // send SMS and get the response
         net.adeonatech.dto.SendTextResponse sendTextResponse = sendSMS.sendText(sendTextBody,
                 sendSMS.getToken(tokenBody).getToken());
+
+        // Add 2-second delay before checking the status
+        Thread.sleep(2000);
 
         // get SMS submission status response
         net.adeonatech.dto.TransactionResponse transactionResponse = sendSMS.getTransactionIDStatus(transactionBody,
